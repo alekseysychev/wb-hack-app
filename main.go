@@ -9,6 +9,7 @@ import (
 	"flag"
 	"log"
 
+	jsoniter "github.com/json-iterator/go"
 	"github.com/valyala/fasthttp"
 	"github.com/valyala/fasthttp/expvarhandler"
 )
@@ -36,6 +37,30 @@ func main() {
 	//     in their names.
 	requestHandler := func(ctx *fasthttp.RequestCtx) {
 		switch string(ctx.Path()) {
+		case "/api":
+			// type ResponceType []string
+			// responce := make(ResponceType, 0)
+			responce := []string{
+				"Поисковая подсказка #0",
+				"Поисковая подсказка #1",
+				"Поисковая подсказка #2",
+				"Поисковая подсказка #3",
+				"Поисковая подсказка #4",
+				"Поисковая подсказка #5",
+				"Поисковая подсказка #6",
+				"Поисковая подсказка #7",
+				"Поисковая подсказка #8",
+				"Поисковая подсказка #9",
+			}
+			data, err := jsoniter.Marshal(responce)
+			if err != nil {
+				ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+				return
+			}
+			if _, err := ctx.Write(data); err != nil {
+				ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+				return
+			}
 		case "/stats":
 			expvarhandler.ExpvarHandler(ctx)
 		default:
