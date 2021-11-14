@@ -5,7 +5,6 @@ function sendRequest(input) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-            console.log('asd');
             if (xmlhttp.status == 200) {
                 let result = JSON.parse(xmlhttp.response);
                 list.innerHTML = '';
@@ -27,9 +26,8 @@ function sendRequest(input) {
             }
         }
     };
-    xmlhttp.open("GET", "/api", true);
+    xmlhttp.open("GET", "/api/query/" + SearchInput.value, true);
     xmlhttp.send();
-    return ['1', '2', '3']
 }
 
 SearchInput.onkeyup = () => {
