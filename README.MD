@@ -1,15 +1,12 @@
-#
-
-## Запуск на сервере
-
-```sh
-sudo go run main.go
-```
-
 Запускать в screen
 
+файлы для модели можно скачать ссылкой ниже https://drive.google.com/drive/folders/1EmBRMRyt1Pug6zdIKxC9hLtHOnvtYF0l?usp=sharing
 ## Запуск локально
 
 ```sh
-go run main.go -addr=":8080"
+pip install req.txt
+
+uvicorn main:app --reload
 ```
+
+Nginx раздает фронт и путь /api/ проксирует на uvicorn сервер 
